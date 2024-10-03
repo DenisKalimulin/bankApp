@@ -1,0 +1,29 @@
+CREATE TABLE Accounts (
+                          id SERIAL PRIMARY KEY,
+                          name VARCHAR(128) NOT NULL,
+                          account_number VARCHAR(12) NOT NULL UNIQUE,
+                          pin_hash VARCHAR(60) NOT NULL,
+                          balance NUMERIC(15, 2) NOT NULL DEFAULT 0.00
+);
+CREATE TABLE Transactions (
+                              id SERIAL PRIMARY KEY,
+                              account_id BIGINT NOT NULL,
+                              amount NUMERIC(15, 2),
+                              type VARCHAR(255) not null ,
+                              FOREIGN KEY (account_id) REFERENCES Accounts(id) ON DELETE CASCADE
+);
+------------------------------
+CREATE TABLE Accounts (
+                          id SERIAL PRIMARY KEY,
+                          name VARCHAR(128) NOT NULL,
+                          account_number VARCHAR(12) NOT NULL UNIQUE,
+                          pinHash VARCHAR(60) NOT NULL,
+                          balance NUMERIC(15, 2) NOT NULL DEFAULT 0.00
+);
+CREATE TABLE Transactions (
+                              id SERIAL PRIMARY KEY,
+                              account_id BIGINT,
+                              amount NUMERIC(15, 2),
+                              type VARCHAR(255) not null ,
+                              FOREIGN KEY (account_id) REFERENCES Accounts(id) ON DELETE SET NULL
+);
